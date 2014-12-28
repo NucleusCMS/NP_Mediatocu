@@ -153,7 +153,8 @@ class MEDIADIRS extends MEDIA
 	function addMediaObject($collection, $uploadfile, $filename) {
 		global $DIR_MEDIA, $manager;
 
-		$manager->notify('PreMediaUpload',array('collection' => &$collection, 'uploadfile' => $uploadfile, 'filename' => &$filename));
+		$param = array('collection' => &$collection, 'uploadfile' => $uploadfile, 'filename' => &$filename);
+		$manager->notify('PreMediaUpload',$param);
 
 		// don't allow uploads to unknown or forbidden collections
 		$exceptReadOnly = true;
@@ -197,7 +198,8 @@ class MEDIADIRS extends MEDIA
 		@chmod($mediadir . $filename, 0644);
 		umask($oldumask);
 
-		$manager->notify('PostMediaUpload',array('collection' => $collection, 'mediadir' => $mediadir, 'filename' => $filename));
+		$param = array('collection' => $collection, 'mediadir' => $mediadir, 'filename' => $filename);
+		$manager->notify('PostMediaUpload',$param);
 
 		return '';
 
