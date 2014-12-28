@@ -24,7 +24,7 @@ class NP_Mediatocu extends NucleusPlugin
 
 	function getVersion()
 	{
-		return '1.1.9';
+		return '1.2';
 	}
 
 	function getDescription()
