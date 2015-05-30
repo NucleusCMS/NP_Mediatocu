@@ -265,7 +265,7 @@ class NP_Mediatocu extends NucleusPlugin
 		global $CONF;
 		$mediaPhpURL  = $this->getAdminURL() . 'media.php';
 		if ($this->use_gray_box) {
-			$gburl = $CONF['PluginURL'] . 'sharedlibs/greybox/';
+			$gburl = $CONF['PluginURL'] . 'mediatocu/greybox/';
 			$extrahead .= <<<_EXTRAHEAD_
 
 	<link href="{$gburl}gb_styles.css" rel="stylesheet" type="text/css" media="all" />
