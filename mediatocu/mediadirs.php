@@ -4,7 +4,7 @@
 class MEDIADIRS extends MEDIA
 {
 
-	function getCollectionList($exceptReadOnly = false,$listmode = 'normal')
+	public static function getCollectionList($exceptReadOnly = false,$listmode = 'normal')
 	{
 		if (!in_array($listmode,array('normal','common','all'))){return;}
 
@@ -54,7 +54,7 @@ class MEDIADIRS extends MEDIA
 		return $collections;
 	}
 
-	function traceCorrectionDir($searchDir, $prefix ='', $preName, $exceptReadOnly = false)
+	public static function traceCorrectionDir($searchDir, $prefix ='', $preName, $exceptReadOnly = false)
 	{
 		global $DIR_MEDIA;
 		$collections = array();		//http://japan.nucleuscms.org/bb/viewtopic.php?p=21230#21230
@@ -77,14 +77,14 @@ class MEDIADIRS extends MEDIA
 		return $collections;
 	}
 
-	function checkHiddenDir($dirname)
+	public static function checkHiddenDir($dirname)
 	{
 		global $manager;
 		$mediatocu = $manager->getPlugin('NP_Mediatocu');
 		return in_array($dirname,$mediatocu->hiddendir);
 	}
 
-	function getMediaListByCollection($collection, $filter = '')
+	public static function getMediaListByCollection($collection, $filter = '')
 	{
 		global $DIR_MEDIA;
 
@@ -118,7 +118,7 @@ class MEDIADIRS extends MEDIA
 	  * checks if a collection exists with the given name, and if it's
 	  * allowed for the currently logged in member to upload files to it
 	  */
-	function isValidCollection($collectionName, $exceptReadOnly = false) {
+	public static function isValidCollection($collectionName, $exceptReadOnly = false) {
 		global $member, $DIR_MEDIA;
 
 		// allow creating new private directory
@@ -150,7 +150,7 @@ class MEDIADIRS extends MEDIA
 	  *		the filename that should be used to save the file as
 	  *		(date prefix should be already added here)
 	  */
-	function addMediaObject($collection, $uploadfile, $filename) {
+	public static function addMediaObject($collection, $uploadfile, $filename) {
 		global $DIR_MEDIA, $manager;
 
 		$param = array('collection' => &$collection, 'uploadfile' => $uploadfile, 'filename' => &$filename);
