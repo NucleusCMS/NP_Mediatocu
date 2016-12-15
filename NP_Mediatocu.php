@@ -105,9 +105,9 @@ class NP_Mediatocu extends NucleusPlugin
 		$this->thumb_h = $this->getOption('thumb_height');
 		$this->thumb_quality = $this->getOption('thumb_quality');
 		$this->hiddendir =  array('.','..','CVS') + explode(',', $this->getOption('hidden_dir'));
+		$this->usemembersettings = ($this->getOption('usemembersettings') == 'yes');
 		$this->def_dir = $this->media_getOption('def_dir');
 		$this->filename_rule = $this->media_getOption('filename_rule');
-		$this->usemembersettings = ($this->getOption('usemembersettings') == 'yes');
 		$this->paste_mode_checked = ($this->media_getOption('paste_mode_checked') == "yes");
 		$this->use_gray_box = ($this->media_getOption('use_gray_box') == 'yes');
 		$this->use_imgpreview = ($this->media_getOption('use_imgpreview') == 'yes');
