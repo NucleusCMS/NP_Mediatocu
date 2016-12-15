@@ -784,7 +784,9 @@ _PASTENOW_;
 function media_loginAndPassThrough()
 {
 	global $mediatocu;
-	if ($mediatocu->usetinymce){
+	if (!isset($mediatocu) || empty($mediatocu)) {
+		$closescript = "window.close();";
+	} else if ($mediatocu->usetinymce){
 		$closescript = 'tinyMCEPopup.close();';
 	} elseif ($mediatocu->use_gray_box) {
 		$closescript = 'top.window.GB_hide();';
@@ -825,12 +827,20 @@ function media_doError($msg)
 function media_head($typeradio = NULL)
 {
 	global $CONF,$mediatocu;
-	$thumb_w = intVal($mediatocu->thumb_w);
-	$thumb_h = intVal($mediatocu->thumb_h);
-	$setType = intval($typeradio);
-	$GreyBox = $mediatocu->use_gray_box;
-	$use_imgpreview = $mediatocu->use_imgpreview;
-	$usetinymce = $mediatocu->usetinymce;
+	if (!isset($mediatocu) || empty($mediatocu)) { // maybe not login
+		$thumb_w = $thumb_h = 100;
+		$setType = 0;
+		$GreyBox = 0;
+		$use_imgpreview = 0;
+		$usetinymce = 0;
+	} else {
+		$thumb_w = intVal($mediatocu->thumb_w);
+		$thumb_h = intVal($mediatocu->thumb_h);
+		$setType = intval($typeradio);
+		$GreyBox = $mediatocu->use_gray_box;
+		$use_imgpreview = $mediatocu->use_imgpreview;
+		$usetinymce = $mediatocu->usetinymce;
+	}
 	echo '<' . '?xml version="1.0" encoding="' . _CHARSET .'"?' . '>' . "\n";
 	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n";
 	echo '<html '._HTML_XML_NAME_SPACE_AND_LANG_CODE.">\n";
