@@ -28,7 +28,9 @@
  */
 
 // include all classes and config data
-require('../../../config.php');
+$p = '../../../';
+$p = (is_file($p.'config.php') ? $p : $p.'../');
+require($p.'config.php');
 include($DIR_LIBS . 'MEDIA.php');	// media classes
 include('mediadirs.php');	// MEDIADIRS classes
 
