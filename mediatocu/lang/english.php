@@ -38,7 +38,7 @@
 	define('_MEDIA_PHP_27','Set "Popup" to default method.');
 	define('_MEDIA_PHP_28','next >>>');
 	define('_MEDIA_PHP_29','<<< prev');
-	define('_MEDIA_PHP_30','Apply');
+//	define('_MEDIA_PHP_30','Apply');
 	define('_MEDIA_PHP_31','Filter: ');
 	define('_MEDIA_PHP_32','MyFolder');
 	define('_MEDIA_PHP_33','Convert file name to UNIX-TIME.');

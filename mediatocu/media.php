@@ -130,7 +130,7 @@ if ($action == '') {
 }
 
 // check ticket
-$aActionsNotToCheck = array('selectmedia', _MEDIA_PHP_30, _MEDIA_FILTER_APPLY, _MEDIA_COLLECTION_SELECT);
+$aActionsNotToCheck = array('selectmedia', _MEDIA_FILTER_APPLY, _MEDIA_COLLECTION_SELECT);
 if (!in_array($action, $aActionsNotToCheck)) {
 	if (!$manager->checkTicket()) {
 		media_doError(_ERROR_BADTICKET);
@@ -146,7 +146,6 @@ switch($action) {
 			media_upload($action);
 		}
 		break;
-	case _MEDIA_PHP_30:
 	case _MEDIA_FILTER_APPLY:
 	case 'selectmedia':
 	case _MEDIA_COLLECTION_SELECT:
