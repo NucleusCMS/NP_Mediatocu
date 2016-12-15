@@ -100,6 +100,8 @@ class NP_Mediatocu extends NucleusPlugin
 			include_once($langdirectory . 'english.php');
 		}
 
+		$this->memsettingupdate = false;
+		$this->thumbupdate      = false;
 		$this->Prefix_thumb = "thumb_";
 		$this->thumb_w = $this->getOption('thumb_width');
 		$this->thumb_h = $this->getOption('thumb_height');
