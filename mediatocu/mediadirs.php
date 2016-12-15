@@ -60,7 +60,7 @@ class MEDIADIRS extends MEDIA
 		$collections = array();		//http://japan.nucleuscms.org/bb/viewtopic.php?p=21230#21230
 		$dirhandle   = @opendir($DIR_MEDIA . $prefix . $searchDir);
 		if (!$dirhandle) {
-			return;
+			return array();
 		}
 		while ($dirname = readdir($dirhandle)) {
 			if (@is_dir($DIR_MEDIA . $prefix . $searchDir . $dirname) && (!MEDIADIRS::checkHiddenDir($dirname))) {
