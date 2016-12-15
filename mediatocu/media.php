@@ -205,9 +205,11 @@ function media_select()
 	switch($typeradio){
 		case '1':
 			$paste_mode_popup_checked = 'checked="checked"';
+			$paste_mode_normal_checked = '';
 			break;
 		case '0':
 			$paste_mode_normal_checked = 'checked="checked"';
+			$paste_mode_popup_checked = '';
 			break;
 		default:
 			media_doError(_ERROR_DISALLOWED);
@@ -307,6 +309,8 @@ function media_select()
 		if ($idxNext < 0) {
 			$idxNext = 0;
 		}
+	} else {
+		$idxStart = $idxEnd = $idxNext = $page = $maxpage = 0;
 	}
 
 	if ($idxStart > 0 && $idxNext > 0) {
