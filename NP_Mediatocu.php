@@ -32,9 +32,9 @@ class NP_Mediatocu extends NucleusPlugin
 		return _MEDIA_PHP_37;
 	}
 
-	function supportsFeature($w)
+	public function supportsFeature($feature)
 	{
-		return ($w == 'SqlTablePrefix') ? 1 : 0;
+		return in_array ($feature, array('SqlTablePrefix', 'NotUseDbApi'));
 	}
 
 /**2005.3--2005.09.26 00:50 keiei edit
@@ -100,14 +100,16 @@ class NP_Mediatocu extends NucleusPlugin
 			include_once($langdirectory . 'english.php');
 		}
 
+		$this->memsettingupdate = false;
+		$this->thumbupdate      = false;
 		$this->Prefix_thumb = "thumb_";
 		$this->thumb_w = $this->getOption('thumb_width');
 		$this->thumb_h = $this->getOption('thumb_height');
 		$this->thumb_quality = $this->getOption('thumb_quality');
 		$this->hiddendir =  array('.','..','CVS') + explode(',', $this->getOption('hidden_dir'));
+		$this->usemembersettings = ($this->getOption('usemembersettings') == 'yes');
 		$this->def_dir = $this->media_getOption('def_dir');
 		$this->filename_rule = $this->media_getOption('filename_rule');
-		$this->usemembersettings = ($this->getOption('usemembersettings') == 'yes');
 		$this->paste_mode_checked = ($this->media_getOption('paste_mode_checked') == "yes");
 		$this->use_gray_box = ($this->media_getOption('use_gray_box') == 'yes');
 		$this->use_imgpreview = ($this->media_getOption('use_imgpreview') == 'yes');
@@ -265,7 +267,10 @@ class NP_Mediatocu extends NucleusPlugin
 		global $CONF;
 		$mediaPhpURL  = $this->getAdminURL() . 'media.php';
 		if ($this->use_gray_box) {
-			$gburl = $CONF['PluginURL'] . 'mediatocu/greybox/';
+			if (version_compare('5.1.2', phpversion(),'<'))
+				$gburl = $this->getAdminURL() . 'greybox/';
+			else
+				$gburl = parse_url($gburl, $this->getAdminURL() . PHP_URL_PATH);
 			$extrahead .= <<<_EXTRAHEAD_
 
 	<link href="{$gburl}gb_styles.css" rel="stylesheet" type="text/css" media="all" />

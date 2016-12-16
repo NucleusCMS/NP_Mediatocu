@@ -28,7 +28,9 @@
  */
 
 // include all classes and config data
-require('../../../config.php');
+$p = '../../../';
+$p = (is_file($p.'config.php') ? $p : $p.'../');
+require($p.'config.php');
 include($DIR_LIBS . 'MEDIA.php');	// media classes
 include('mediadirs.php');	// MEDIADIRS classes
 
@@ -130,7 +132,7 @@ if ($action == '') {
 }
 
 // check ticket
-$aActionsNotToCheck = array('selectmedia', _MEDIA_PHP_30, _MEDIA_FILTER_APPLY, _MEDIA_COLLECTION_SELECT);
+$aActionsNotToCheck = array('selectmedia', _MEDIA_FILTER_APPLY, _MEDIA_COLLECTION_SELECT);
 if (!in_array($action, $aActionsNotToCheck)) {
 	if (!$manager->checkTicket()) {
 		media_doError(_ERROR_BADTICKET);
@@ -146,7 +148,6 @@ switch($action) {
 			media_upload($action);
 		}
 		break;
-	case _MEDIA_PHP_30:
 	case _MEDIA_FILTER_APPLY:
 	case 'selectmedia':
 	case _MEDIA_COLLECTION_SELECT:
@@ -206,9 +207,11 @@ function media_select()
 	switch($typeradio){
 		case '1':
 			$paste_mode_popup_checked = 'checked="checked"';
+			$paste_mode_normal_checked = '';
 			break;
 		case '0':
 			$paste_mode_normal_checked = 'checked="checked"';
+			$paste_mode_popup_checked = '';
 			break;
 		default:
 			media_doError(_ERROR_DISALLOWED);
@@ -308,6 +311,8 @@ function media_select()
 		if ($idxNext < 0) {
 			$idxNext = 0;
 		}
+	} else {
+		$idxStart = $idxEnd = $idxNext = $page = $maxpage = 0;
 	}
 
 	if ($idxStart > 0 && $idxNext > 0) {
@@ -781,7 +786,9 @@ _PASTENOW_;
 function media_loginAndPassThrough()
 {
 	global $mediatocu;
-	if ($mediatocu->usetinymce){
+	if (!isset($mediatocu) || empty($mediatocu)) {
+		$closescript = "window.close();";
+	} else if ($mediatocu->usetinymce){
 		$closescript = 'tinyMCEPopup.close();';
 	} elseif ($mediatocu->use_gray_box) {
 		$closescript = 'top.window.GB_hide();';
@@ -822,12 +829,20 @@ function media_doError($msg)
 function media_head($typeradio = NULL)
 {
 	global $CONF,$mediatocu;
-	$thumb_w = intVal($mediatocu->thumb_w);
-	$thumb_h = intVal($mediatocu->thumb_h);
-	$setType = intval($typeradio);
-	$GreyBox = $mediatocu->use_gray_box;
-	$use_imgpreview = $mediatocu->use_imgpreview;
-	$usetinymce = $mediatocu->usetinymce;
+	if (!isset($mediatocu) || empty($mediatocu)) { // maybe not login
+		$thumb_w = $thumb_h = 100;
+		$setType = 0;
+		$GreyBox = 0;
+		$use_imgpreview = 0;
+		$usetinymce = 0;
+	} else {
+		$thumb_w = intVal($mediatocu->thumb_w);
+		$thumb_h = intVal($mediatocu->thumb_h);
+		$setType = intval($typeradio);
+		$GreyBox = $mediatocu->use_gray_box;
+		$use_imgpreview = $mediatocu->use_imgpreview;
+		$usetinymce = $mediatocu->usetinymce;
+	}
 	echo '<' . '?xml version="1.0" encoding="' . _CHARSET .'"?' . '>' . "\n";
 	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n";
 	echo '<html '._HTML_XML_NAME_SPACE_AND_LANG_CODE.">\n";
