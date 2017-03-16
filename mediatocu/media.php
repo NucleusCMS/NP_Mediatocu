@@ -94,11 +94,11 @@ if ($targetthumb) {
 			$ok = 0;
 			$allowedtypes = explode (',', $CONF['AllowedTypes']);
 			foreach ($allowedtypes as $type) {
-				if (eregi("\." . $type . "$", $newfilename)) {
+				if (preg_match('/\.' . $type . '$/i', $newfilename)) {
 					$ok = 1;
 				}
 			}
-			if (eregi("\.php$", $newfilename)) {
+			if (preg_match('/\.php$/i', $newfilename)) {
 				$ok = 0;
 			}
 			if (!$ok) {
@@ -478,7 +478,7 @@ function media_upload($action)
 	$ok           = 0;
 	$allowedtypes = explode (',', $CONF['AllowedTypes']);
 	foreach ( $allowedtypes as $type ) {
-		if (eregi("\." .$type. "$",$filename)) {
+		if (preg_match('/\.' .$type. '$/i',$filename)) {
 			$ok = 1;
 		}
 	}
