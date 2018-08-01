@@ -430,9 +430,9 @@ function media_upload($action)
 {
 	global $DIR_MEDIA, $CONF, $manager,$mediatocu;
 	$uploadInfo   = postFileInfo('uploadfile');
-
+	if(!$uploadInfo) return;
 	$filename = hsc($uploadInfo['name']);
-
+	
 	$filename  = preg_replace('/%2f/i','/',$filename );
 	$filetype     = $uploadInfo['type'];
 	$filesize     = $uploadInfo['size'];
