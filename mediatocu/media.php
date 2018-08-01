@@ -68,14 +68,14 @@ if ($targetthumb) {
 			if ($exist) {
 				$msg1 = @media_unlink($mediapath, $targetfile);
 				if (!$msg1) {
-					print htmlspecialchars($targetfile . _MEDIA_PHP_2,ENT_QUOTES,_CHARSET);
+					print hsc($targetfile . _MEDIA_PHP_2);
 				}
 			}
 			$exist = file_exists($mediapath . $targetthumb);
 			if ($exist) {
 				$msg2 = @media_unlink($mediapath, $targetthumb);
 				if (!$msg2) {
-					print htmlspecialchars($targetthumb . _MEDIA_PHP_2,ENT_QUOTES,_CHARSET);
+					print hsc($targetthumb . _MEDIA_PHP_2);
 				}
 			}
 			break;
@@ -109,16 +109,16 @@ if ($targetthumb) {
 			}
 			$exist = file_exists($mediapath . $targetfile);
 			if ($exist) {
-				$msg1 = @media_rename($mediapath, $targetfile, htmlspecialchars($newfilename,ENT_QUOTES,_CHARSET) );
+				$msg1 = @media_rename($mediapath, $targetfile, hsc($newfilename) );
 				if (!$msg1) {
-					print htmlspecialchars($targetfile . _MEDIA_PHP_10,ENT_QUOTES,_CHARSET);
+					print hsc($targetfile . _MEDIA_PHP_10);
 				}
 			}
 			$exist = file_exists($mediapath . $targetthumb);
 			if ($exist) {
 				$msg2 = @media_rename($mediapath,$targetthumb, $Prefix_thumb . $newfilename);
 				if (!$msg2) {
-					print htmlspecialchars($targetthumb . _MEDIA_PHP_10,ENT_QUOTES,_CHARSET);
+					print hsc($targetthumb . _MEDIA_PHP_10);
 				}
 			}
 			break;
@@ -223,53 +223,53 @@ function media_select()
 		<form method="post" enctype="multipart/form-data" action="media.php" name="mainform" id="mainform">
 		<table summary="mainform">
 			<tr>
-				<th><label for="media_collection"><?php echo htmlspecialchars(_MEDIA_COLLECTION_LABEL,ENT_QUOTES,_CHARSET)?></label></th>
+				<th><label for="media_collection"><?php echo hsc(_MEDIA_COLLECTION_LABEL)?></label></th>
 				<td><select name="collection" id="media_collection" onchange="return form.submit()">
 <?php
 	foreach ($collections as $dirname => $description) {
-		echo "\t\t\t\t\t<option value=\"",htmlspecialchars($dirname,ENT_QUOTES,_CHARSET),'"';
+		echo "\t\t\t\t\t<option value=\"",hsc($dirname),'"';
 		if ((string)$dirname === $currentCollection) {
 			echo ' selected="selected"';
 		}
-		echo '>',htmlspecialchars($description,ENT_QUOTES,_CHARSET),"</option>\n";
+		echo '>',hsc($description),"</option>\n";
 	}
 ?>
 				</select></td>
-				<td><input type="submit" name="action" value="<?php echo htmlspecialchars(_MEDIA_PHP_ACTION_DIR,ENT_QUOTES,_CHARSET) ?>" title="<?php echo htmlspecialchars(_MEDIA_PHP_ACTION_DIR_TT,ENT_QUOTES,_CHARSET) ?>" /></td>
+				<td><input type="submit" name="action" value="<?php echo hsc(_MEDIA_PHP_ACTION_DIR) ?>" title="<?php echo hsc(_MEDIA_PHP_ACTION_DIR_TT) ?>" /></td>
 			</tr>
 			<tr>
-				<th><label for="uploadfile"><?php echo htmlspecialchars(_MEDIA_PHP_50,ENT_QUOTES,_CHARSET)?></label></th>
+				<th><label for="uploadfile"><?php echo hsc(_MEDIA_PHP_50)?></label></th>
 				<td><input name="uploadfile" id="uploadfile" type="file" /></td>
-				<td><input type="submit" name="action" value="<?php echo htmlspecialchars(_UPLOAD_BUTTON,ENT_QUOTES,_CHARSET); ?>" /></td>
+				<td><input type="submit" name="action" value="<?php echo hsc(_UPLOAD_BUTTON); ?>" /></td>
 			</tr>
 			<tr>
-				<th><?php echo htmlspecialchars(_MEDIA_PHP_11,ENT_QUOTES,_CHARSET) ?></th>
+				<th><?php echo hsc(_MEDIA_PHP_11) ?></th>
 				<td>
 <?php
 		if ($usetinymce){
 ?>
 					<input id="typeradio0" type="radio" class="radio" name="typeradio" value="0" checked="checked" />
-					<label for="typeradio0"><?php echo htmlspecialchars(_MEDIA_INLINE,ENT_QUOTES,_CHARSET);?></label>
+					<label for="typeradio0"><?php echo hsc(_MEDIA_INLINE);?></label>
 					<input id="typeradio1" type="radio" class="radio" name="typeradio" value="1" disabled="disabled" />
-					<label for="typeradio1"><?php echo htmlspecialchars(_MEDIA_POPUP,ENT_QUOTES,_CHARSET); ?></label>
+					<label for="typeradio1"><?php echo hsc(_MEDIA_POPUP); ?></label>
 <?php
 		}else{
 ?>
 					<input id="typeradio0" type="radio" class="radio" name="typeradio" onclick="setType(0);" onkeypress="setType(0);" value="0" <?php echo $paste_mode_normal_checked; ?> />
-					<label for="typeradio0"><?php echo htmlspecialchars(_MEDIA_INLINE,ENT_QUOTES,_CHARSET);?></label>
+					<label for="typeradio0"><?php echo hsc(_MEDIA_INLINE);?></label>
 					<input id="typeradio1" type="radio" class="radio" name="typeradio" onclick="setType(1);" onkeypress="setType(1);" value="1" <?php echo $paste_mode_popup_checked; ?> />
-					<label for="typeradio1"><?php echo htmlspecialchars(_MEDIA_POPUP,ENT_QUOTES,_CHARSET); ?></label>
+					<label for="typeradio1"><?php echo hsc(_MEDIA_POPUP); ?></label>
 <?php
 		}
 ?>
 				</td>
-				<td><input type="submit" name="action" value="<?php echo htmlspecialchars(_MEDIA_PHP_PASTENOW_BUTTON,ENT_QUOTES,_CHARSET); ?>" /></td>
+				<td><input type="submit" name="action" value="<?php echo hsc(_MEDIA_PHP_PASTENOW_BUTTON); ?>" /></td>
 			</tr>
 			<tr>
-				<th><label for="media_filter"><?php echo htmlspecialchars(_MEDIA_FILTER_LABEL,ENT_QUOTES,_CHARSET)?></label></th>
-				<td><input id="media_filter" type="text" name="filter" value="<?php echo htmlspecialchars($filter,ENT_QUOTES,_CHARSET)?>" /></td>
+				<th><label for="media_filter"><?php echo hsc(_MEDIA_FILTER_LABEL)?></label></th>
+				<td><input id="media_filter" type="text" name="filter" value="<?php echo hsc($filter)?>" /></td>
 				<td>
-					<input type="submit" name="action" value="<?php echo htmlspecialchars(_MEDIA_FILTER_APPLY,ENT_QUOTES,_CHARSET) ?>" />
+					<input type="submit" name="action" value="<?php echo hsc(_MEDIA_FILTER_APPLY) ?>" />
 					<?php $manager->addTicketHidden() ?> 
 					<input type="hidden" name="offset" id="offset" value="" />
 				</td>
@@ -317,20 +317,20 @@ function media_select()
 
 	if ($idxStart > 0 && $idxNext > 0) {
 		$page = ($idxStart-1);
-		$pageswitch = "\t\t\t<a href=\"media.php?offset=$page&amp;typeradio=$typeradio&amp;collection=". urlencode($currentCollection)."&amp;filter=" . urlencode($filter)."\" onclick=\"return pageset($page)\" onkeypress=\"return pageset($page)\">" . htmlspecialchars(_MEDIA_PHP_29) . "</a>\n";
+		$pageswitch = "\t\t\t<a href=\"media.php?offset=$page&amp;typeradio=$typeradio&amp;collection=". urlencode($currentCollection)."&amp;filter=" . urlencode($filter)."\" onclick=\"return pageset($page)\" onkeypress=\"return pageset($page)\">" . hsc(_MEDIA_PHP_29) . "</a>\n";
 	} else {
 		$pageswitch = "";
 	}
 	if ($idxStart < $maxpage) {
 		$page = ($idxStart+1);
-		$pageswitch .= "\t\t\t<a href=\"media.php?offset=$page&amp;typeradio=$typeradio&amp;collection=". urlencode($currentCollection)."&amp;filter=" . urlencode($filter)."\" onclick=\"return pageset($page)\" onkeypress=\"return pageset($page)\">" . htmlspecialchars(_MEDIA_PHP_28) . "</a>\n";
+		$pageswitch .= "\t\t\t<a href=\"media.php?offset=$page&amp;typeradio=$typeradio&amp;collection=". urlencode($currentCollection)."&amp;filter=" . urlencode($filter)."\" onclick=\"return pageset($page)\" onkeypress=\"return pageset($page)\">" . hsc(_MEDIA_PHP_28) . "</a>\n";
 	}
 	echo $pageswitch;
-	echo "\t\t</span>\n\t\t<span class='right'>".htmlspecialchars(_MEDIA_PHP_6 . $conts_count,ENT_QUOTES,_CHARSET)  . "</span><span>". intVal($idxNext+1) . " - " . htmlspecialchars($idxEnd . _MEDIA_PHP_7,ENT_QUOTES,_CHARSET)."</span></p>\n\t\t<!--/form-->\n";
+	echo "\t\t</span>\n\t\t<span class='right'>".hsc(_MEDIA_PHP_6 . $conts_count)  . "</span><span>". intVal($idxNext+1) . " - " . hsc($idxEnd . _MEDIA_PHP_7)."</span></p>\n\t\t<!--/form-->\n";
 	if ($conts_count>0) {
 		// Get ticket
 		$ticket=$manager->addTicketToUrl('');
-		$hscTicket=htmlspecialchars(preg_replace('/^.*=/','',$ticket),ENT_QUOTES,_CHARSET);
+		$hscTicket=hsc(preg_replace('/^.*=/','',$ticket));
 		for ($i=$idxNext;$i<$idxEnd;$i++) {
 			$filename = $DIR_MEDIA . $currentCollection . '/' . $contents[$i]->filename;
 			$targetfile = $contents[$i]->filename;
@@ -350,19 +350,19 @@ function media_select()
 			$encthumb_file = rawurlencode($thumb_file);
 			$thumb_exist = file_exists($mediapath . $thumb_file);
 			/*Thumbnail*/
-			$hscJsCC = htmlspecialchars($jsCurrentCollection,ENT_QUOTES,_CHARSET);
-			$hscTGTF = htmlspecialchars($targetfile,ENT_QUOTES,_CHARSET);
-			$hscTTGT = htmlspecialchars($thumb_targetfile,ENT_QUOTES,_CHARSET);
-			$hscJsFN = htmlspecialchars($jsFileName,ENT_QUOTES,_CHARSET);
-			$hscencFN = htmlspecialchars($encFileName,ENT_QUOTES,_CHARSET);
-			$hscCCol = htmlspecialchars($currentCollection,ENT_QUOTES,_CHARSET);
-			$hscencCCol = htmlspecialchars($encCurrentCollection,ENT_QUOTES,_CHARSET);
-			$hscThFN = htmlspecialchars($thumb_file,ENT_QUOTES,_CHARSET);
-			$hscencThFN = htmlspecialchars($encthumb_file,ENT_QUOTES,_CHARSET);
-			$hscMEDA = htmlspecialchars($CONF['MediaURL'],ENT_QUOTES,_CHARSET);
-			$hscMVEW = htmlspecialchars(_MEDIA_VIEW,ENT_QUOTES,_CHARSET);
-			$hscMVTT = htmlspecialchars(_MEDIA_VIEW_TT,ENT_QUOTES,_CHARSET);
-			$hscMedia26 = htmlspecialchars(_MEDIA_PHP_26,ENT_QUOTES,_CHARSET);
+			$hscJsCC = hsc($jsCurrentCollection);
+			$hscTGTF = hsc($targetfile);
+			$hscTTGT = hsc($thumb_targetfile);
+			$hscJsFN = hsc($jsFileName);
+			$hscencFN = hsc($encFileName);
+			$hscCCol = hsc($currentCollection);
+			$hscencCCol = hsc($encCurrentCollection);
+			$hscThFN = hsc($thumb_file);
+			$hscencThFN = hsc($encthumb_file);
+			$hscMEDA = hsc($CONF['MediaURL']);
+			$hscMVEW = hsc(_MEDIA_VIEW);
+			$hscMVTT = hsc(_MEDIA_VIEW_TT);
+			$hscMedia26 = hsc(_MEDIA_PHP_26);
 			echo "\t\t<div class='box'>\n";
 			if ($filetype != 0 && !$thumb_exist) {
 				// image (gif/jpg/png/swf)
@@ -376,7 +376,7 @@ function media_select()
 _DIVTHUMB_;
 			} else {
 				// When you do not make the thumbnail with mpg and wmv, etc.
-				echo "\t\t\t<div class=\"media\">".htmlspecialchars(strtoupper(pathinfo($filename,PATHINFO_EXTENSION)),ENT_QUOTES,_CHARSET)."</div>\n";
+				echo "\t\t\t<div class=\"media\">".hsc(strtoupper(pathinfo($filename,PATHINFO_EXTENSION)))."</div>\n";
 			}
 			echo "\t\t\t";
 			if ($intWidth||$intHeight){
@@ -398,9 +398,9 @@ _MEDIAPREVIEW_;
 
 _MEDIAFILE_;
 			}
-			$hscMedia01 = htmlspecialchars(_MEDIA_PHP_1,ENT_QUOTES,_CHARSET);
-			$hscMedia03 = htmlspecialchars(_MEDIA_PHP_3,ENT_QUOTES,_CHARSET);
-			$hscMedia04 = htmlspecialchars(_MEDIA_PHP_4,ENT_QUOTES,_CHARSET);
+			$hscMedia01 = hsc(_MEDIA_PHP_1);
+			$hscMedia03 = hsc(_MEDIA_PHP_3);
+			$hscMedia04 = hsc(_MEDIA_PHP_4);
 			echo <<<_FORMBLOCK_
 			<form method="post" action="media.php">
 				<div>
@@ -431,7 +431,8 @@ function media_upload($action)
 	global $DIR_MEDIA, $CONF, $manager,$mediatocu;
 	$uploadInfo   = postFileInfo('uploadfile');
 
-	$filename = htmlspecialchars($uploadInfo['name'],ENT_QUOTES,_CHARSET);
+	$filename = hsc($uploadInfo['name']);
+
 	$filename  = preg_replace('/%2f/i','/',$filename );
 	$filetype     = $uploadInfo['type'];
 	$filesize     = $uploadInfo['size'];
@@ -599,31 +600,31 @@ function media_mkdir($action)
 
 		if (sizeof($collections) > 0) {
 ?>
-		<h1><?php echo htmlspecialchars(_MEDIA_MKDIR_TITLE,ENT_QUOTES,_CHARSET); ?></h1>
-		<p><?php echo htmlspecialchars(_MEDIA_MKDIR_MSG,ENT_QUOTES,_CHARSET); ?></p>
+		<h1><?php echo hsc(_MEDIA_MKDIR_TITLE); ?></h1>
+		<p><?php echo hsc(_MEDIA_MKDIR_MSG); ?></p>
 		<form method="post" action="media.php">
 			<table summary="mkdir">
 			<tr>
-				<th><label for="mkdirname"><?php echo htmlspecialchars(_MEDIA_PHP_51,ENT_QUOTES,_CHARSET); ?></label></th>
+				<th><label for="mkdirname"><?php echo hsc(_MEDIA_PHP_51); ?></label></th>
 				<td colspan="2"><input name="mkdirname" id="mkdirname" type="text" size="40" value="" />
-				<input type="hidden" name="action" value="<?php echo htmlspecialchars(_MEDIA_PHP_ACTION_MKDIR,ENT_QUOTES,_CHARSET); ?>" />
-				<input type="hidden" name="typeradio" value="<?php echo htmlspecialchars($typeradio,ENT_QUOTES,_CHARSET); ?>" />
+				<input type="hidden" name="action" value="<?php echo hsc(_MEDIA_PHP_ACTION_MKDIR); ?>" />
+				<input type="hidden" name="typeradio" value="<?php echo hsc($typeradio); ?>" />
 				<?php $manager->addTicketHidden() ?></td>
 			</tr>
 			<tr>
-				<th><label for="mkdir_collection"><?php echo htmlspecialchars(_MEDIA_PHP_52,ENT_QUOTES,_CHARSET); ?></label></th>
+				<th><label for="mkdir_collection"><?php echo hsc(_MEDIA_PHP_52); ?></label></th>
 				<td><select name="mkdir_collection" id="mkdir_collection">
 <?php
 			foreach ($collections as $dirname => $description) {
-				echo "\t\t\t\t\t".'<option value="',htmlspecialchars($dirname,ENT_QUOTES,_CHARSET),'"';
+				echo "\t\t\t\t\t".'<option value="',hsc($dirname),'"';
 				if ((string)$dirname === $current) {
 					echo ' selected="selected"';
 				}
-				echo '>' . htmlspecialchars($description,ENT_QUOTES,_CHARSET) . "</option>\n";
+				echo '>' . hsc($description) . "</option>\n";
 			}
 ?>
 				</select></td>
-				<td><input type="submit" value="<?php echo htmlspecialchars(_MEDIA_MKDIR_BUTTON,ENT_QUOTES,_CHARSET); ?>" /></td>
+				<td><input type="submit" value="<?php echo hsc(_MEDIA_MKDIR_BUTTON); ?>" /></td>
 			</tr>
 			</table>
 		</form>
@@ -631,30 +632,30 @@ function media_mkdir($action)
 		}
 		if (sizeof($collections) > 1) {
 ?>
-		<h1><?php echo htmlspecialchars(_MEDIA_RMDIR_TITLE,ENT_QUOTES,_CHARSET); ?></h1>
-		<p><?php echo htmlspecialchars(_MEDIA_RMDIR_MSG,ENT_QUOTES,_CHARSET); ?></p>
+		<h1><?php echo hsc(_MEDIA_RMDIR_TITLE); ?></h1>
+		<p><?php echo hsc(_MEDIA_RMDIR_MSG); ?></p>
 		<form method="post" action="media.php">
 			<table summary="rmdir">
 			<tr>
-				<th><input type="hidden" name="action" value="<?php echo htmlspecialchars(_MEDIA_PHP_ACTION_RMDIR,ENT_QUOTES,_CHARSET); ?>" />
-				<input type="hidden" name="typeradio" value="<?php echo htmlspecialchars($typeradio,ENT_QUOTES,_CHARSET); ?>" />
-				<label for="rmdir_collection"><?php echo htmlspecialchars(_MEDIA_PHP_52,ENT_QUOTES,_CHARSET); ?></label></th>
+				<th><input type="hidden" name="action" value="<?php echo hsc(_MEDIA_PHP_ACTION_RMDIR); ?>" />
+				<input type="hidden" name="typeradio" value="<?php echo hsc($typeradio); ?>" />
+				<label for="rmdir_collection"><?php echo hsc(_MEDIA_PHP_52); ?></label></th>
 				<td><select name="rmdir_collection" id="rmdir_collection">
 <?php
 			$basecollections = MEDIA::getCollectionList();
 			foreach ($collections as $dirname => $description) {
 //				if (is_numeric($dirname)) continue;
 				if (array_key_exists($dirname,$basecollections)) continue;
-				echo "\t\t\t\t\t".'<option value="',htmlspecialchars($dirname,ENT_QUOTES,_CHARSET),'"';
+				echo "\t\t\t\t\t".'<option value="',hsc($dirname),'"';
 				if ((string)$dirname === $current) {
 					echo ' selected="selected"';
 				}
-				echo '>',htmlspecialchars($description,ENT_QUOTES,_CHARSET),"</option>\n";
+				echo '>',hsc($description),"</option>\n";
 			}
 ?>
 				</select></td>
 				<td><?php $manager->addTicketHidden() ?> 
-				<input type="submit" value="<?php echo htmlspecialchars(_MEDIA_RMDIR_BUTTON,ENT_QUOTES,_CHARSET); ?>" /></td>
+				<input type="submit" value="<?php echo hsc(_MEDIA_RMDIR_BUTTON); ?>" /></td>
 			</tr>
 			</table>
 		</form>
@@ -761,8 +762,8 @@ function thumb_gd($fname, $thumbfile, $out_w, $out_h, $size, $quality)
 function media_pastenow($collection,$filename,$width,$height,$filetype,$type){
 	if (!MEDIADIRS::isValidCollection($collection)) media_doError(_ERROR_DISALLOWED);
 	if(!array_key_exists($collection,MEDIADIRS::getCollectionList(false,'normal'))) media_doError(_ERROR_DISALLOWED);
-	$hscJsCC = htmlspecialchars(str_replace("'","\\'",preg_replace('/%2f/i','/',rawurlencode($collection))),ENT_QUOTES,_CHARSET);
-	$hscJsFN = htmlspecialchars(str_replace("'","\\'",rawurlencode($filename)),ENT_QUOTES,_CHARSET);
+	$hscJsCC = hsc(str_replace("'","\\'",preg_replace('/%2f/i','/',rawurlencode($collection))));
+	$hscJsFN = hsc(str_replace("'","\\'",rawurlencode($filename)));
 	$intWidth = intval($width);
 	$intHeight = intval($height);
 	$inttype = intval($type);
@@ -802,13 +803,13 @@ function media_loginAndPassThrough()
 		<form method="post" action="media.php">
 		<div>
 			<input name="action" value="login" type="hidden" />
-			<input name="collection" value="<?php echo htmlspecialchars(requestVar('collection'),ENT_QUOTES,_CHARSET); ?>" type="hidden" />
-			<?php echo htmlspecialchars(_LOGINFORM_NAME,ENT_QUOTES,_CHARSET); ?> <input name="login" value="" />
-			<br /><?php echo htmlspecialchars(_LOGINFORM_PWD,ENT_QUOTES,_CHARSET); ?> <input name="password" type="password" />
-			<br /><input type="submit" value="<?php echo htmlspecialchars(_LOGIN,ENT_QUOTES,_CHARSET); ?>" />
+			<input name="collection" value="<?php echo hsc(requestVar('collection')); ?>" type="hidden" />
+			<?php echo hsc(_LOGINFORM_NAME); ?> <input name="login" value="" />
+			<br /><?php echo hsc(_LOGINFORM_PWD); ?> <input name="password" type="password" />
+			<br /><input type="submit" value="<?php echo hsc(_LOGIN); ?>" />
 		</div>
 		</form>
-		<p><a href="media.php" onclick="<?php echo htmlspecialchars($closescript,ENT_QUOTES,_CHARSET); ?>" onkeypress="<?php echo htmlspecialchars($closescript,ENT_QUOTES,_CHARSET); ?>"><?php echo htmlspecialchars(_POPUP_CLOSE,ENT_QUOTES,_CHARSET); ?></a></p>
+		<p><a href="media.php" onclick="<?php echo hsc($closescript); ?>" onkeypress="<?php echo hsc($closescript); ?>"><?php echo hsc(_POPUP_CLOSE); ?></a></p>
 <?php
 	media_foot();
 	exit;
@@ -818,8 +819,8 @@ function media_doError($msg)
 {
 	if (!headers_sent()) media_head();
 ?>
-	<h1><?php echo htmlspecialchars(_ERROR,ENT_QUOTES,_CHARSET); ?></h1>
-	<p><?php echo htmlspecialchars($msg,ENT_QUOTES,_CHARSET); ?></p>
+	<h1><?php echo hsc(_ERROR); ?></h1>
+	<p><?php echo hsc($msg); ?></p>
 <?php
 	media_back();
 	media_foot();
@@ -851,7 +852,7 @@ function media_head($typeradio = NULL)
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 		<meta http-equiv="Expires" content="-1" />
-		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo htmlspecialchars(_CHARSET,ENT_QUOTES,_CHARSET); ?>" />
+		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo hsc(_CHARSET); ?>" />
 		<meta http-equiv="Content-Script-Type" content="text/javascript" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />
 		<title>Mediatocu</title>
@@ -860,7 +861,7 @@ function media_head($typeradio = NULL)
 			var type = <?php echo intVal($setType); ?>;
 			function setType(val) { type = val; }
 			function kakunin(value){
-				res=confirm('<?php echo htmlspecialchars(_MEDIA_PHP_8,ENT_QUOTES,_CHARSET); ?>'+value+'<?php echo htmlspecialchars(_MEDIA_PHP_9,ENT_QUOTES,_CHARSET); ?>');
+				res=confirm('<?php echo hsc(_MEDIA_PHP_8); ?>'+value+'<?php echo hsc(_MEDIA_PHP_9); ?>');
 				return res;
 			}
 			function pageset(page){
@@ -987,7 +988,7 @@ function media_back($currentCollection=false)
 	if ($currentCollection){
 		echo "?collection=".urlencode($currentCollection);
 	}
-	echo '">'.htmlspecialchars(_BACK,ENT_QUOTES,_CHARSET)."</a></p>\n";
+	echo '">'.hsc(_BACK)."</a></p>\n";
 }
 
 function media_foot()
