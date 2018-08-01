@@ -441,7 +441,7 @@ function media_upload($action)
 	$Prefix_thumb = $mediatocu->Prefix_thumb;
 	if ($mediatocu->filename_rule == "ascii") {
 		$path_parts = pathinfo($filename);
-		$filename   = time() . "." . $path_parts['extension'];
+		$filename   = date('Y-m-d-H-i-s') . '.' . $path_parts['extension'];
 	}
 	$typeradio = intPostVar('typeradio');
 
